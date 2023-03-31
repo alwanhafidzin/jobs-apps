@@ -36,7 +36,7 @@ public class AuthService {
     public RegistrationResponse register(RegistrationRequest request) {
         log.info("Start register new user");
         try{
-            var getByUsername = userRepository.findByUsernameAndRoles(request.getUsername(),RoleConstant.ROLE_ADMIN);
+            var getByUsername = userRepository.findByUsername(request.getUsername());
             if(getByUsername.isPresent()){
                 throw new UsernameAlreadyRegistredException("Username already registred");
             }
@@ -72,12 +72,12 @@ public class AuthService {
     public RegistrationResponse registerAdmin(RegistrationRequest request) {
         log.info("Start register new user");
         try{
-            var getByUsername = userRepository.findByUsernameAndRoles(request.getUsername(),RoleConstant.ROLE_ADMIN);
+            var getByUsername = userRepository.findByUsername(request.getUsername());
             if(getByUsername.isPresent()){
                 throw new UsernameAlreadyRegistredException("Username already registred");
             }
             var getByEmail = userRepository.findByEmailAndRoles(request.getEmail(),RoleConstant.ROLE_ADMIN);
-            if(getByUsername.isPresent()){
+            if(getByEmail.isPresent()){
                 throw new EmailAlreadyRegistredException("Email already registred");
             }
             Users user = new Users();
