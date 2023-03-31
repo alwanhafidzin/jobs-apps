@@ -40,7 +40,7 @@ public class AuthService {
             if(getByUsername.isPresent()){
                 throw new UsernameAlreadyRegistredException("Username already registred");
             }
-            var getByEmail = userRepository.findByEmailAndRoles(request.getEmail(),RoleConstant.ROLE_ADMIN);
+            var getByEmail = userRepository.findByEmail(request.getEmail());
             if(getByEmail.isPresent()){
                 throw new EmailAlreadyRegistredException("Email already registred");
             }
@@ -76,7 +76,7 @@ public class AuthService {
             if(getByUsername.isPresent()){
                 throw new UsernameAlreadyRegistredException("Username already registred");
             }
-            var getByEmail = userRepository.findByEmailAndRoles(request.getEmail(),RoleConstant.ROLE_ADMIN);
+            var getByEmail = userRepository.findByEmail(request.getEmail());
             if(getByEmail.isPresent()){
                 throw new EmailAlreadyRegistredException("Email already registred");
             }
